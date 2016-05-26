@@ -1,0 +1,23 @@
+/*
+ * Project: funky-java-gym
+ * Author: Marco Faustinelli - Muzietto (contacts@faustinelli.net)
+ * Web: http://faustinelli.wordpress.com/, http://www.github.com/muzietto, http://faustinelli.net/
+ * Version: 0.1
+ * The GPL 3.0 License - Copyright (c) 2016 - The funky-java-gym Project
+ */
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+
+apply plugin: 'application'
+mainClassName = 'net.faustinelli.earthquakes.Main'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}

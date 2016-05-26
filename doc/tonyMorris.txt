@@ -1,0 +1,9 @@
+http://blog.tmorris.net/posts/understanding-practical-api-design-static-typing-and-functional-programming/
+
+https://github.com/tonymorris/course/tree/master/projects/TicTacToe/java/src/tictactoe
+
+
+https://smartbear.com/ppc/ebooks/complete-guide-to-approaching-your-dev-team/?sr=codinghorror&md=ad&cm=2391111
+
+diddlego
+
