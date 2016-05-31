@@ -39,8 +39,9 @@ public class EligibilityValidator {
     */
 
         Optional<String> depot = Optional.ofNullable(task.getDepot());
-        Optional<String> sourceSystem = Optional.ofNullable(task.getId())
-            .map(Identifier::getSystem);
+        Optional<String> sourceSystemCode = Optional.ofNullable(task.getId())
+            .map(Task.TriggerId::getSystem)
+                .map(Task.SourceSystem::getCode);
 
         Boolean isValidDepot = new Statements<String>(
             MSS_DEPOT::equals,
@@ -51,7 +52,7 @@ public class EligibilityValidator {
             BOOKING_ENGINE::equals,
             BACKWARD_BRIDGE::equals,
             FORWARD_BRIDGE::equals
-        ).disjunction(sourceSystem);
+        ).disjunction(sourceSystemCode);
 
         return isValidDepot || isValidSystem;
     }

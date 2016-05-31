@@ -8,18 +8,84 @@
 
 package net.faustinelli.funkyJavaGym.ch6._03_statements.model;
 
+import java.util.Locale;
+
 /**
  * Created by Marco Faustinelli (Muzietto) on 31/05/2016.
  */
 public class Task {
     private String depot;
-    private Integer id;
+    private TriggerId id;
 
     public String getDepot() {
-        return depot;
+        return this.depot;
     }
 
-    public Integer getId() {
+    private void setDepot(String depot) {
+        this.depot = depot;
+    }
+
+    public TriggerId getId() {
         return id;
+    }
+
+    private void setId(TriggerId id) {
+        this.id = id;
+    }
+
+    public static Task.Builder newBuilder() {
+        return new Builder();
+    }
+
+    public Task.Builder update() {
+        return new Builder(this);
+    }
+
+    public static class Builder {
+        private Task theTask = new Task();
+
+        private Builder() { }
+
+        public Builder(Task task) {
+            this.theTask = task;
+        }
+
+        public Builder depot(String depot) {
+            this.theTask.setDepot(depot);
+            return this;
+        }
+
+        public Task build() {
+            return theTask;
+        }
+
+        public Builder triggerId(String sourceSystemCode) {
+            this.theTask.setId(new TriggerId(new SourceSystem(sourceSystemCode)));
+            return this;
+        }
+
+    }
+
+    public static class TriggerId {
+        private SourceSystem system;
+        TriggerId(SourceSystem system) {
+            this.system = system;
+        }
+
+        public static SourceSystem getSystem(TriggerId triggerId) {
+            return triggerId.system;
+        }
+    }
+
+    public static class SourceSystem {
+        private final String sourceSystemCode;
+
+        public SourceSystem(String code) {
+            this.sourceSystemCode = code;
+        }
+
+        public static String getCode(SourceSystem sourceSystem) {
+            return sourceSystem.sourceSystemCode;
+        }
     }
 }
