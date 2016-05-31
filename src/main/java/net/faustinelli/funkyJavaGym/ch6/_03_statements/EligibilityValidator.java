@@ -8,6 +8,9 @@
 
 package net.faustinelli.funkyJavaGym.ch6._03_statements;
 
+import net.faustinelli.funkyJavaGym.ch6._03_statements.model.Identifier;
+import net.faustinelli.funkyJavaGym.ch6._03_statements.model.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
