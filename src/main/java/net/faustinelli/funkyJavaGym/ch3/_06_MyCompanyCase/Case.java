@@ -1,6 +1,4 @@
-package com.jpmorgan.ib.cp.scpp.ame.cosmic.bridge.service.util;
-
-import org.springframework.jms.core.ProducerCallback;
+package net.faustinelli.funkyJavaGym.ch3._06_MyCompanyCase;
 
 import java.util.function.Predicate;
 import java.util.function.Supplier;
