@@ -6,9 +6,10 @@
  * The GPL 3.0 License - Copyright (c) 2015-2016 - The funky-java-gym Project
  */
 
-package net.faustinelli.funkyJavaGym.ch6_03_statements;
+package net.faustinelli.funkyJavaGym.ch6._03_statements;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -21,25 +22,24 @@ public class Statements<T> {
     private List<Predicate<T>> matchers = new ArrayList<Predicate<T>>();
 
     public Statements(Predicate<T>... predicates) {
-        for (Predicate<T> pred : predicates) {
-            matchers.add(pred);
-        }
+        this.matchers = Arrays.asList(predicates);
     }
 
-    public Boolean disjunction(Optional<T> match) {
-        return matchers
-            .stream()
-            .filter(pred -> match.filter(pred).isPresent())
-            .findAny()
-            .map(__ -> Boolean.TRUE)
-            .orElse(Boolean.FALSE);
+    public Boolean disjunction(Optional<T> needTest) {
+        return needTest.map(m ->
+                matchers
+                        .stream()
+                        .map(p -> p.test(m))
+                        .reduce((a, b) -> a || b).get()
+        ).orElse(Boolean.FALSE);
     }
 
-    public Boolean conjunction(Optional<T> match) {
-        return matchers
-            .stream()
-            .filter(pred -> !match.filter(pred).isPresent())
-            .findAny()
-            .map(__ -> Boolean.FALSE)
-            .orElse(Boolean.TRUE);
-    }}
+    public Boolean conjunction(Optional<T> needTest) {
+        return needTest.map(m ->
+                matchers
+                        .stream()
+                        .map(p -> p.test(m))
+                        .reduce((a, b) -> a && b).get()
+        ).orElse(Boolean.FALSE);
+    }
+}
