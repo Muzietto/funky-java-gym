@@ -37,21 +37,32 @@ public class MyTask {
         return id.map(Task.TriggerId::getSystem);
     }
 
+    public Task task() {
+        return new Task.Builder(this.task).build();
+    }
+
+    public MyBuilder update() {
+        return new MyBuilder(this.task);
+    }
+
     public static class MyBuilder {
         private Task.Builder theBuilder = Task.newBuilder();
 
         private MyBuilder() { }
 
         public MyBuilder(Task task) {
-            this.theBuilder
-                    .depot(task.getDepot())
-                    .triggerId(Task.SourceSystem
-                            .getCode(Task.TriggerId
-                                    .getSystem(task.getId())));;
+            Optional.ofNullable(task.getDepot())
+                    .map(d -> { this.theBuilder.depot(d); return d; });
+            Optional.ofNullable(task.getId())
+                    .map(Task.TriggerId::getSystem)
+                    .map(Task.SourceSystem::getCode)
+                    .map(ssc -> { this.theBuilder.triggerId(ssc); return ssc; });
         }
 
         public MyBuilder depot(String depot) {
-            this.theBuilder.depot(depot);
+            if (depot != null) {
+                this.theBuilder.depot(depot);
+            }
             return this;
         }
 
@@ -60,7 +71,9 @@ public class MyTask {
         }
 
         public MyBuilder triggerId(String sourceSystemCode) {
-            this.theBuilder.triggerId(sourceSystemCode);
+            if (sourceSystemCode != null) {
+                this.theBuilder.triggerId(sourceSystemCode);
+            }
             return this;
         }
     }
