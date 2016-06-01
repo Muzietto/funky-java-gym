@@ -63,7 +63,6 @@ public class Task {
             this.theTask.setId(new TriggerId(new SourceSystem(sourceSystemCode)));
             return this;
         }
-
     }
 
     public static class TriggerId {
