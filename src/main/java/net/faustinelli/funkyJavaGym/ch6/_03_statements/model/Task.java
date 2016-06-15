@@ -8,14 +8,16 @@
 
 package net.faustinelli.funkyJavaGym.ch6._03_statements.model;
 
-import java.util.Locale;
-
 /**
  * Created by Marco Faustinelli (Muzietto) on 31/05/2016.
  */
 public class Task {
     private String depot;
     private TriggerId id;
+
+    public static Task.Builder newBuilder() {
+        return new Builder();
+    }
 
     public String getDepot() {
         return this.depot;
@@ -33,10 +35,6 @@ public class Task {
         this.id = id;
     }
 
-    public static Task.Builder newBuilder() {
-        return new Builder();
-    }
-
     public Task.Builder update() {
         return new Builder(this);
     }
@@ -44,7 +42,8 @@ public class Task {
     public static class Builder {
         private Task theTask = new Task();
 
-        private Builder() { }
+        private Builder() {
+        }
 
         public Builder(Task task) {
             this.theTask = task;
@@ -67,6 +66,7 @@ public class Task {
 
     public static class TriggerId {
         private SourceSystem system;
+
         TriggerId(SourceSystem system) {
             this.system = system;
         }
@@ -85,6 +85,15 @@ public class Task {
 
         public static String getCode(SourceSystem sourceSystem) {
             return sourceSystem.sourceSystemCode;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            try {
+                return this.sourceSystemCode.equals(((SourceSystem) obj).sourceSystemCode);
+            } catch (Exception exc) {
+                return false;
+            }
         }
     }
 }
