@@ -17,9 +17,9 @@ import static junit.framework.TestCase.assertTrue;
 /**
  * Created by Marco Faustinelli (Muzietto) on 31/05/2016.
  */
-public class EligibilityEvaluatorTest {
+public class StatementsBasedEligibilityValidatorTest {
 
-    EligibilityValidator validator = new EligibilityValidator();
+    StatementsBasedEligibilityValidator validator = new StatementsBasedEligibilityValidator();
 
     @Test
     public void onlySingaporeDepotsAreEligible() throws Exception {
