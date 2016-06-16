@@ -53,6 +53,7 @@ public class MyTask {
         public MyBuilder(Task task) {
             Optional.ofNullable(task.getDepot())
                     .map(d -> { this.theBuilder.depot(d); return d; });
+
             Optional.ofNullable(task.getId())
                     .map(Task.TriggerId::getSystem)
                     .map(Task.SourceSystem::getCode)

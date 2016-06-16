@@ -25,8 +25,8 @@ public class Statements<T> {
         this.matchers = Arrays.asList(predicates);
     }
 
-    public Boolean disjunction(Optional<T> needTest) {
-        return needTest.map(m ->
+    public Boolean disjunction(Optional<T> needsTest) {
+        return needsTest.map(m ->
                 matchers
                         .stream()
                         .map(p -> p.test(m))
@@ -34,8 +34,8 @@ public class Statements<T> {
         ).orElse(Boolean.FALSE);
     }
 
-    public Boolean conjunction(Optional<T> needTest) {
-        return needTest.map(m ->
+    public Boolean conjunction(Optional<T> needsTest) {
+        return needsTest.map(m ->
                 matchers
                         .stream()
                         .map(p -> p.test(m))
