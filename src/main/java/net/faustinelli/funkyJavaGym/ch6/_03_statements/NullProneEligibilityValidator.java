@@ -14,18 +14,16 @@ import net.faustinelli.funkyJavaGym.ch6._03_statements.model.Task;
  * Created by Marco Faustinelli (Muzietto) on 15/06/2016.
  */
 public class NullProneEligibilityValidator implements EligibilityValidator<Task> {
-    public static final Task.SourceSystem BOOKING_ENGINE_SYSTEM = Task.newBuilder().triggerId(BOOKING_ENGINE).build().getId().getSystem(Task.newBuilder().triggerId(BOOKING_ENGINE).build().getId());
-    public static final Task.SourceSystem BACKWARD_BRIDGE_SYSTEM = Task.newBuilder().triggerId(FORWARD_BRIDGE).build().getId().getSystem(Task.newBuilder().triggerId(FORWARD_BRIDGE).build().getId());
-    public static final Task.SourceSystem FORWARD_BRIDGE_SYSTEM = Task.newBuilder().triggerId(BACKWARD_BRIDGE).build().getId().getSystem(Task.newBuilder().triggerId(BACKWARD_BRIDGE).build().getId());
 
     @Override
     public Boolean isEligible(Task task) {
         String depot = task.getDepot();
         return MSS_DEPOT.equals(depot) || MSAPL_DEPOT.equals(depot)
-                || (task.getId() != null && (
-                BOOKING_ENGINE_SYSTEM.equals(task.getId().getSystem(task.getId()))
-                        || BACKWARD_BRIDGE_SYSTEM.equals(task.getId().getSystem(task.getId()))
-                        || FORWARD_BRIDGE_SYSTEM.equals(task.getId().getSystem(task.getId()))
-        ));
+                || (task.getId() != null &&
+                (
+                        BOOKING_ENGINE_SYSTEM.equals(task.getId().getSystem(task.getId()))
+                                || BACKWARD_BRIDGE_SYSTEM.equals(task.getId().getSystem(task.getId()))
+                                || FORWARD_BRIDGE_SYSTEM.equals(task.getId().getSystem(task.getId()))
+                ));
     }
 }
